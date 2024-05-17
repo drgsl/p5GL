@@ -1,13 +1,11 @@
 #include <stdio.h>
 
-#include "engine.cpp"
+#include "../engine.cpp"
 #include <GL/freeglut_std.h>
 
 
 void setup()
 {
-//   background(0, 1, 0, 1);
-
   strokeWeight(10);
 //   stroke(1, 0, 0, 1);
 //   point(0.5, 0.5);
@@ -25,7 +23,7 @@ void setup()
 //   point(0,0);
 //   point(1,1);
 
-  background(0,0,1,1);
+  background(Color("hotpink"));
 }
 
 double num2 = -1;
@@ -33,9 +31,9 @@ double num3 = -1;
 double inc = 0.01;
 void loop()
 {
-  background(0,0, 1, 1);
+  background(Color("hotpink"));
   point(0,0);
-  stroke(255,0,0,1);
+  stroke(Color("purple"));
   line(0,0,num2, 0);
   line(0,0, 0, num3);
   line(0,0,num2, num3);
@@ -55,7 +53,13 @@ void loop()
   }
 
   
-  printf("%f \n", num2);
+  // printf("%f \n", num2);
+  //
+  fill();
+  circle(0,0, 0.5);
+  fill();
+  stroke(Color("orange", 0.5));
+  rect(-0.5, 0.5, 1, 1);
 }
 
 
