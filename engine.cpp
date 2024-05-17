@@ -1,49 +1,51 @@
 
+#include <GL/freeglut.h>
 
-#include <stdio.h>
-#include <GL/glut.h>
 
-class Canvas
+
+void background(double r, double g, double b, double a)
 {
-  public:
-    int width, height;
+  glClearColor( r, g, b, a);
 
-    Canvas(int _w, int _h) : width(_w), height(_h) 
-    {
-      glutInit(0, 0);
-      glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-      glutInitWindowSize(width, height);
-      glutInitWindowPosition(0,0);
-      glutCreateWindow("Canvas");
+  glClear(GL_COLOR_BUFFER_BIT);
 
-      //callback functions
-       glutReshapeFunc(reshape);
-       glutDisplayFunc(display);
-      glutKeyboardFunc(keyboard);
-         glutMouseFunc(mouse);
+  glFlush();
+}
 
-      glutMainLoop();
-    }
+void strokeWeight(double weight)
+{
+  glPointSize(weight);
+  glLineWidth(weight);
+}
 
-    void display()
-    {
-      printf("DisplayFunction");
-    }
+void stroke(double r, double g, double b, double a)
+{
+  glColor4f(r,g,b, a);
+}
 
-    void reshape()
-    {
-      printf("ReshapeFunction");
-    }
+void point(double x, double y)
+{
+  glBegin(GL_POINTS); 
+    glVertex2f(x, y);
+  glEnd();
+}
 
-    void keyboard()
-    {
-      printf("keyboard");
-    }
+void line(double x, double y, double x2, double y2)
+{
+  glBegin(GL_LINES);
+    glVertex2f(x, y);
+    glVertex2f(x2,y2);
+  glEnd();
 
-    void mouse()
-    {
-      printf("mouse");
-    }
-};
+}
 
+void rect(double x, double y, double w, double h)
+{
+  glBegin(GL_POLYGON);
+    glVertex2f(x, y);
+    glVertex2f(x+w, y);
+    glVertex2f(x+w, y-h);
+    glVertex2f(x, y-h);
+  glEnd();
+}
 
