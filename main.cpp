@@ -3,8 +3,12 @@
 #include <GL/freeglut.h>
 unsigned char prevKey;
 
+#include "math.cpp"
+#include "renderer.cpp"
+
 // import user script
-#include "examples/basics.cpp"
+//#include "examples/basics.cpp"
+#include "examples/transform.cpp"
 
 
 
