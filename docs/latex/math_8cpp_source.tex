@@ -1,0 +1,53 @@
+\doxysection{math.\+cpp}
+\hypertarget{math_8cpp_source}{}\label{math_8cpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}math/vector.cpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}math/color.cpp"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cmath>}\ \textcolor{comment}{//\ for\ std::cos,\ std::sin,\ std::atan2,\ std::sqrt}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMath}{Math}}\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ PI\ =\ 3.14159265358979323846;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ HALF\_PI\ =\ PI\ /\ 2;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ QUARTER\_PI\ =\ PI\ /\ 4;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ randomRange(\textcolor{keywordtype}{double}\ min,\ \textcolor{keywordtype}{double}\ max)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \textcolor{comment}{//\ Random\ number\ generator}}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::random\_device\ rd;\ \ \ \textcolor{comment}{//\ Non-\/deterministic\ generator}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\ gen(rd());\ \ \textcolor{comment}{//\ Seed\ the\ generator}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ std::uniform\_real\_distribution<>\ dis(min,\ max);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ and\ return\ a\ random\ value}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ dis(gen);}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Trigonometric\ functions}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ cos(\textcolor{keywordtype}{double}\ angle)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::cos(angle);}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ sin(\textcolor{keywordtype}{double}\ angle)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::sin(angle);}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ Convert\ Cartesian\ coordinates\ to\ polar\ coordinates}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Returns\ a\ pair\ where\ first\ element\ is\ the\ radius\ and\ second\ element\ is\ the\ angle}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<double,\ double>\ cartesianToPolar(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ radius\ =\ std::sqrt(x\ *\ x\ +\ y\ *\ y);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ angle\ =\ std::atan2(y,\ x);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{radius,\ angle\};}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Convert\ polar\ coordinates\ to\ Cartesian\ coordinates}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ Takes\ radius\ and\ angle\ as\ inputs\ and\ returns\ a\ pair\ of\ x\ and\ y}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<double,\ double>\ polarToCartesian(\textcolor{keywordtype}{double}\ radius,\ \textcolor{keywordtype}{double}\ angle)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ radius\ *\ std::cos(angle);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ radius\ *\ std::sin(angle);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{x,\ y\};}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \};}
+
+\end{DoxyCode}

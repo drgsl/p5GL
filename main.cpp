@@ -7,11 +7,10 @@ unsigned char prevKey;
 #include "renderer.cpp"
 
 // import user script
-//#include "examples/basics.cpp"
-#include "examples/transform.cpp"
-
-
-
+// #include "sketches/basics.cpp"
+// #include "sketches/transform.cpp"
+// #include "sketches/dvd.cpp"
+#include "sketches/pong.cpp"
 
 
 void display(void)
@@ -32,17 +31,24 @@ void reshape(int w, int h)
 
 void keyboard(unsigned char key, int x, int y)
 {
-  printf("keyboard event \n");
-  printf("key pressed: %c \n", key);
+  // printf("keyboard event \n");
+  // printf("key pressed: %c \n", key);
   if (key == 27)
     exit(0);
-  printf("mouse pos: x%d y%d \n", x, y);
+  // printf("mouse pos: x%d y%d \n", x, y);
 
+  keyPressed(key, x, y);
 }
 
 void mouse(int button, int state, int x, int y)
 {
-  printf("mouse \n");
+  printf("mouse %d \n", state);
+
+  if(state == 0)
+    keyPressed(button + '0', x, y);
+
+  // if (state == 1)
+    // keyReleased(button + '0', x, y);
 }
 
 void glutSetup()

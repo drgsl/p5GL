@@ -1,0 +1,117 @@
+\doxysection{primitives.\+cpp}
+\hypertarget{primitives_8cpp_source}{}\label{primitives_8cpp_source}\index{renderer/primitives.cpp@{renderer/primitives.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//class\ Sphere\ :\ Shape\ \{\};}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//class\ Cube\ \ \ :\ Shape\ \{\};}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//virtual\ class\ Shape\ :\ Vector4\ \{\};}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classQuad}{Quad}}\ }
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ bottomLeft;}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ topRight;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{classQuad}{Quad}}(\mbox{\hyperlink{classVector3}{Vector3}}\ \_bottomLeft,\ \mbox{\hyperlink{classVector3}{Vector3}}\ \_topRight)}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ :\ bottomLeft(\_bottomLeft),\ topRight(\_topRight)\ \{\}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classQuad}{Quad}}()}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classQuad}{Quad}}(\mbox{\hyperlink{classVector3}{Vector3}}(0,0,0),\ \mbox{\hyperlink{classVector3}{Vector3}}(1,1,1))\ \{\}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ show()}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ topLeft(bottomLeft.x,\ topRight.y,\ 0.0,\ 1.0);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ bottomRight(topRight.x,\ bottomLeft.y,\ 0.0,\ 1.0);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ glBegin(GL\_POLYGON);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ glVertex4f(bottomLeft.x,\ bottomLeft.y,\ bottomLeft.z,\ bottomLeft.w);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ glVertex4f(bottomRight.x,\ bottomRight.y,\ bottomRight.z,\ bottomRight.w);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ glVertex4f(topRight.x,\ topRight.y,\ topRight.z,\ topRight.w);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ glVertex4f(topLeft.x,\ topLeft.y,\ topLeft.z,\ topLeft.w);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ glEnd();}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ translate(\mbox{\hyperlink{classVector3}{Vector3}}\ offset)}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ bottomLeft\ +=\ offset;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ topRight\ +=\ offset;}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ rotate(\textcolor{keywordtype}{float}\ angleDegrees)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angleRadians\ =\ angleDegrees\ *\ M\_PI\ /\ 180.0f;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cosAngle\ =\ cos(angleRadians);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sinAngle\ =\ sin(angleRadians);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ center\ =\ \mbox{\hyperlink{classVector3}{Vector3}}((bottomLeft.x\ +\ topRight.x)\ /\ 2,\ (bottomLeft.y\ +\ topRight.y)\ /\ 2,\ 0);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ rotatePoint\ =\ [cosAngle,\ sinAngle,\ center](\mbox{\hyperlink{classVector3}{Vector3}}\ point)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ point.x\ -\/\ center.x;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ point.y\ -\/\ center.y;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ newX\ =\ x\ *\ cosAngle\ -\/\ y\ *\ sinAngle\ +\ center.x;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ newY\ =\ x\ *\ sinAngle\ +\ y\ *\ cosAngle\ +\ center.y;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classVector3}{Vector3}}(newX,\ newY,\ point.z);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ bottomLeft\ =\ rotatePoint(bottomLeft);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ topRight\ =\ rotatePoint(topRight);}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ scale(\textcolor{keywordtype}{float}\ scaleFactor)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ center\ =\ \mbox{\hyperlink{classVector3}{Vector3}}((bottomLeft.x\ +\ topRight.x)\ /\ 2,\ (bottomLeft.y\ +\ topRight.y)\ /\ 2,\ 0);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ bottomLeft\ =\ (bottomLeft\ -\/\ center)\ *\ scaleFactor\ +\ center;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ topRight\ =\ (topRight\ -\/\ center)\ *\ scaleFactor\ +\ center;}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classLine}{Line}}\ }
+\DoxyCodeLine{00066\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ start;}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ finish;\ \textcolor{comment}{//end}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//LineType\ Enum\ }}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ show()}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ glBegin(GL\_LINES);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ glVertex4f(start.x,\ start.y,\ start.z,\ start.w);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ glVertex4f(finish.x,\ finish.y,\ finish.z,\ finish.w);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ glEnd();}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPoint}{Point}}\ }
+\DoxyCodeLine{00081\ \{}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ pos;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}(\mbox{\hyperlink{classVector3}{Vector3}}\ \_pos)}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ :\ pos(\_pos)\ \{\}}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}()}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ :\ pos(\mbox{\hyperlink{classVector3}{Vector3}}(0,0,0))\ \{\}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ show()}
+\DoxyCodeLine{00091\ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ glBegin(GL\_POINTS);\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ glVertex4f(pos.x,\ pos.y,\ pos.z,\ pos.w);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ glEnd();}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ translate(\mbox{\hyperlink{classVector3}{Vector3}}\ offset)}
+\DoxyCodeLine{00098\ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ pos.x\ +=\ offset.x;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ pos.y\ +=\ offset.y;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ pos.z\ +=\ offset.z;}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{comment}{//class\ Primitive\ }}
+\DoxyCodeLine{00106\ \textcolor{comment}{//\{}}
+\DoxyCodeLine{00107\ \textcolor{comment}{//\ \ \ \ Vector2\ a;}}
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ \ \ \ Vector2\ b;}}
+\DoxyCodeLine{00109\ \textcolor{comment}{//\ \ \ \ Primitive()\ \{\}}}
+\DoxyCodeLine{00110\ \textcolor{comment}{//\};}}
+\DoxyCodeLine{00111\ }
+
+\end{DoxyCode}

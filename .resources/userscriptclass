@@ -1,0 +1,111 @@
+
+Sure, we can achieve this using classes. We can create a UserScript class that contains optional setup and loop methods. Users can inherit from this class and override these methods as needed. If the user script doesn't define these methods, the default implementations provided in the UserScript class will be used.
+
+Here's how you can implement it:
+
+Step 1: Define the UserScript Class
+cpp
+Copy code
+#include <iostream>
+
+class UserScript {
+public:
+    virtual void setup() {
+        // Default setup code
+        std::cout << "Default setup" << std::endl;
+    }
+
+    virtual void loop() {
+        // Default loop code
+        std::cout << "Default loop" << std::endl;
+    }
+};
+Step 2: Inherit from UserScript in User Scripts
+In the user script (dvd.cpp), the user can define their own setup and loop methods by inheriting from UserScript:
+
+cpp
+Copy code
+#include "UserScript.h"
+
+class MyScript : public UserScript {
+public:
+    void setup() override {
+        // User-defined setup code
+        std::cout << "User-defined setup" << std::endl;
+    }
+
+    void loop() override {
+        // User-defined loop code
+        std::cout << "User-defined loop" << std::endl;
+    }
+};
+Step 3: Modify main.cpp to Use UserScript
+cpp
+Copy code
+#include <GL/freeglut_std.h>
+#include <stdio.h>
+#include <GL/freeglut.h>
+unsigned char prevKey;
+
+#include "math.cpp"
+#include "renderer.cpp"
+#include "UserScript.h"
+
+void display(void) {
+    userScript.loop();
+    glutSwapBuffers();
+    glFlush();
+    glutPostRedisplay();
+}
+
+void reshape(int w, int h) {
+    glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+}
+
+void keyboard(unsigned char key, int x, int y) {
+    printf("key pressed: %c \n", key);
+    if (key == 27) exit(0);
+    printf("mouse pos: x%d y%d \n", x, y);
+}
+
+void mouse(int button, int state, int x, int y) {
+    printf("mouse \n");
+}
+
+void glutSetup() {
+    glutInitWindowSize(480, 480); // 480x640
+    glutInitWindowPosition(0, 0);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+    glutCreateWindow("Canvas");
+
+    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutMouseFunc(mouse);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutSetup();
+
+    // Create an instance of UserScript
+    MyScript userScript;
+
+    // Call setup method
+    userScript.setup();
+
+    glutMainLoop();
+
+    return 0;
+}
+Explanation
+UserScript Class: We define a UserScript class with virtual setup and loop methods. These methods have default implementations that can be overridden by derived classes.
+User Script Implementation: In the user script (dvd.cpp), the user defines their own setup and loop methods by inheriting from UserScript and overriding these methods.
+Main Program: The main program in main.cpp creates an instance of the user script class (MyScript). It then calls the setup method to execute the user-defined setup code. The loop method is called in the display function to execute the user-defined loop code.
+This approach allows users to define only the methods they need without any additional syntax, providing a clean and flexible solution.
+
+
+
+
+
+

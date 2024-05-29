@@ -46,4 +46,11 @@ void loop()
 }
 
 
-
+void keyPressed(unsigned char key, int x, int y)
+{
+printf("%c", key);
+// printf("%d", key);
+printf("\n");
+printf("%d %d", x, y);
+printf("\n");
+}
