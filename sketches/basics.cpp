@@ -1,5 +1,3 @@
-
-
 void setup()
 {
   strokeWeight(10);
@@ -44,8 +42,6 @@ void loop()
   rect(Vector3(-0.5, 0.5, 0.0, 1.0), Vector3(0.5, -0.5, 0.0, 1.0));
 
 }
-
-
 void keyPressed(unsigned char key, int x, int y)
 {
 printf("%c", key);

@@ -1,0 +1,90 @@
+\doxysection{color.\+cpp}
+\hypertarget{color_8cpp_source}{}\label{color_8cpp_source}\index{/home/admin/git/p5GL/math/color.cpp@{/home/admin/git/p5GL/math/color.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}named\_colors.cpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ Color\ class\ with\ multiple\ constructors}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classColor}{Color}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{double}\ r,\ g,\ b,\ a;}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classColor}{Color}}\ random;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{/*****\ *****\ *****\ *****\ *****\ *****}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ CONSTRUCTORS}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *****\ *****\ *****\ *****\ *****\ *****/}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}()\ :\ \mbox{\hyperlink{classColor}{Color}}(0,0,0)\ \{\}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Constructor\ for\ grayscale\ color}}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}(\textcolor{keywordtype}{double}\ \_value)}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classColor}{Color}}(\_value,\ \_value,\ \_value,\ 1.0f)\ \{\}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ Constructor\ for\ RGB\ color}}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}(\textcolor{keywordtype}{double}\ \_r,\ \textcolor{keywordtype}{double}\ \_g,\ \textcolor{keywordtype}{double}\ \_b)}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classColor}{Color}}(\_r,\ \_g,\ \_b,\ 1.0f)\ \{\}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ Main\ constructor\ for\ RGBA\ color}}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}(\textcolor{keywordtype}{double}\ \_r,\ \textcolor{keywordtype}{double}\ \_g,\ \textcolor{keywordtype}{double}\ \_b,\ \textcolor{keywordtype}{double}\ \_a)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ :\ r(\_r),\ g(\_g),\ b(\_b),\ a(\_a)\ \{\}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ Constructor\ for\ named\ color}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}(\textcolor{keyword}{const}\ std::string\&\ colorName)}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classColor}{Color}}(colorName,\ 1.0f)\ \{\}}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}(\textcolor{keyword}{const}\ std::string\&\ colorName,\ \textcolor{keywordtype}{double}\ \_a)\ }
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ namedColors.find(colorName);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ namedColors.end())\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ std::get<0>(it-\/>second);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ g\ =\ std::get<1>(it-\/>second);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ std::get<2>(it-\/>second);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ \_a;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Unknown\ color\ name"{}});}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{/*****\ *****\ *****\ *****\ *****\ *****}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ OPERATORS}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ *****\ *****\ *****\ *****\ *****\ *****/}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{//\ Define\ the\ operator\ to\ get\ the\ opposite\ color}}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}\ operator\string~()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classColor}{Color}}(1.0\ -\/\ r,\ 1.0\ -\/\ g,\ 1.0\ -\/\ b,\ a);}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{/*****\ *****\ *****\ *****\ *****\ *****}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ RANDOM}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ *****\ *****\ *****\ *****\ *****\ *****/}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classColor}{Color}}\ generateRandomColor()\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::random\_device\ rd;\ \ \textcolor{comment}{//\ Non-\/deterministic\ generator}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\ gen(rd());\ \textcolor{comment}{//\ Seed\ the\ generator}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::uniform\_real\_distribution<>\ dis(0.0,\ 1.0);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_r\ =\ dis(gen);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_g\ =\ dis(gen);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_b\ =\ dis(gen);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_a\ =\ dis(gen);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classColor}{Color}}(\_r,\ \_g,\ \_b,\ \_a);}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classColor}{Color}}\ getRandom()\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::random\_device\ rd;\ \ \textcolor{comment}{//\ Non-\/deterministic\ generator}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\ gen(rd());\ \textcolor{comment}{//\ Seed\ the\ generator}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::uniform\_real\_distribution<>\ dis(0.0,\ 1.0);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_r\ =\ dis(gen);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_g\ =\ dis(gen);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_b\ =\ dis(gen);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_a\ =\ dis(gen);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classColor}{Color}}(\_r,\ \_g,\ \_b,\ \_a);}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ Definition\ of\ static\ member}}
+\DoxyCodeLine{00084\ \mbox{\hyperlink{classColor}{Color}}\ Color::random\ =\ Color::generateRandomColor();}
+
+\end{DoxyCode}

@@ -1,0 +1,79 @@
+\doxysection{Vector3 Class Reference}
+\hypertarget{classVector3}{}\label{classVector3}\index{Vector3@{Vector3}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVector3_abd212891b980697249cc866bd2636417}\label{classVector3_abd212891b980697249cc866bd2636417} 
+{\bfseries Vector3} (double \+\_\+x, double \+\_\+y)
+\item 
+\Hypertarget{classVector3_a3b7c8173ed2b3b6683665c603cf7b24b}\label{classVector3_a3b7c8173ed2b3b6683665c603cf7b24b} 
+{\bfseries Vector3} (double \+\_\+x, double \+\_\+y, double \+\_\+z)
+\item 
+\Hypertarget{classVector3_ae57a83bf07b3479ab9b661bafb9f4257}\label{classVector3_ae57a83bf07b3479ab9b661bafb9f4257} 
+{\bfseries Vector3} (double \+\_\+x, double \+\_\+y, double \+\_\+z, double \+\_\+w)
+\item 
+\Hypertarget{classVector3_a0e7eb0557486b19d8c2f38c6bbe0e068}\label{classVector3_a0e7eb0557486b19d8c2f38c6bbe0e068} 
+\mbox{\hyperlink{classVector3}{Vector3}} \& {\bfseries operator=} (const \mbox{\hyperlink{classVector3}{Vector3}} \&other)
+\item 
+\Hypertarget{classVector3_a9dbccb6721900d305483b20dfcfc5f45}\label{classVector3_a9dbccb6721900d305483b20dfcfc5f45} 
+\mbox{\hyperlink{classVector3}{Vector3}} \& {\bfseries operator+=} (const \mbox{\hyperlink{classVector3}{Vector3}} \&other)
+\item 
+\Hypertarget{classVector3_ab337fe4b0c5fd44657f42427e265c982}\label{classVector3_ab337fe4b0c5fd44657f42427e265c982} 
+\mbox{\hyperlink{classVector3}{Vector3}} \& {\bfseries operator\texorpdfstring{$\ast$}{*}=} (float scalar)
+\item 
+\Hypertarget{classVector3_ad572247e5bd9afab9d1639610f0b0ac6}\label{classVector3_ad572247e5bd9afab9d1639610f0b0ac6} 
+\mbox{\hyperlink{classVector3}{Vector3}} {\bfseries operator\texorpdfstring{$\ast$}{*}} (float scalar) const
+\item 
+\Hypertarget{classVector3_a15b8664404b17aecd37d44be761f3b72}\label{classVector3_a15b8664404b17aecd37d44be761f3b72} 
+\mbox{\hyperlink{classVector3}{Vector3}} {\bfseries operator-\/} (const \mbox{\hyperlink{classVector3}{Vector3}} \&other) const
+\item 
+\Hypertarget{classVector3_a9df9e4a930ba3d0d98aeec28430927de}\label{classVector3_a9df9e4a930ba3d0d98aeec28430927de} 
+\mbox{\hyperlink{classVector3}{Vector3}} {\bfseries operator+} (const \mbox{\hyperlink{classVector3}{Vector3}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVector3_a57df594e3e0de2ffe0b7e3a24fceb9ee}\label{classVector3_a57df594e3e0de2ffe0b7e3a24fceb9ee} 
+static \mbox{\hyperlink{classVector3}{Vector3}} {\bfseries get\+Random} ()
+\item 
+\Hypertarget{classVector3_acd68920bffa962fd2561c47af7eb6fe4}\label{classVector3_acd68920bffa962fd2561c47af7eb6fe4} 
+static \mbox{\hyperlink{classVector3}{Vector3}} {\bfseries generate\+Random\+Vector} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVector3_a60aa84ebc037dec9faba617f8ddb231d}\label{classVector3_a60aa84ebc037dec9faba617f8ddb231d} 
+double {\bfseries x}
+\item 
+\Hypertarget{classVector3_ae4965693beffdb6069e0618222cae459}\label{classVector3_ae4965693beffdb6069e0618222cae459} 
+double {\bfseries y}
+\item 
+\Hypertarget{classVector3_aa5f4108b2839a110eeaec8606780eaff}\label{classVector3_aa5f4108b2839a110eeaec8606780eaff} 
+double {\bfseries z}
+\item 
+\Hypertarget{classVector3_a70fd3dabcb53da5e14e696a5bb9d13e3}\label{classVector3_a70fd3dabcb53da5e14e696a5bb9d13e3} 
+double {\bfseries w}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVector3_aa41278d0d8be1611c927879d4c57dc41}\label{classVector3_aa41278d0d8be1611c927879d4c57dc41} 
+static \mbox{\hyperlink{classVector3}{Vector3}} {\bfseries zero} = \mbox{\hyperlink{classVector3}{Vector3}}(0, 0, 0, 1)
+\item 
+\Hypertarget{classVector3_a1f11c3643c8ccf9c2a8852b945c3ef69}\label{classVector3_a1f11c3643c8ccf9c2a8852b945c3ef69} 
+static \mbox{\hyperlink{classVector3}{Vector3}} {\bfseries one} = \mbox{\hyperlink{classVector3}{Vector3}}(1, 1, 1, 1)
+\item 
+\Hypertarget{classVector3_ab23cb8c9f028ce749404a09e08f11547}\label{classVector3_ab23cb8c9f028ce749404a09e08f11547} 
+static \mbox{\hyperlink{classVector3}{Vector3}} {\bfseries random} = Vector3\+::generate\+Random\+Vector()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVector3_aac34174a73bd09af706112150105b8bb}\label{classVector3_aac34174a73bd09af706112150105b8bb} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{classVector3}{Vector3}} \&vec)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/admin/git/p5\+GL/math/vector.\+cpp\end{DoxyCompactItemize}

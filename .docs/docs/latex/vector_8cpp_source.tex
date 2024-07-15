@@ -1,0 +1,147 @@
+\doxysection{vector.\+cpp}
+\hypertarget{vector_8cpp_source}{}\label{vector_8cpp_source}\index{/home/admin/git/p5GL/math/vector.cpp@{/home/admin/git/p5GL/math/vector.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ class\ Vector2\ \{}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ \ \ public:}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \ \ \ \ double\ x,\ y,\ w;}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ \ \ \ \ Vector2(double\ \_x,\ double\ \_y)}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ :\ Vector2(\_x,\ \_y,\ 1.0f)\ \{\}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ \ \ \ \ Vector2(double\ \_x,\ double\ \_y,\ double\ \_w)}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ :\ x(\_x),\ y(\_y),\ w(\_w)\ \{\}}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ //Vector3(\_x,\ \_y,\ 0,\ 1.0f)\ \{\}}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \};}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classVector3}{Vector3}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\ x,\ y,\ z,\ w;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classVector3}{Vector3}}\ zero;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classVector3}{Vector3}}\ \ one;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classVector3}{Vector3}}\ random;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{/*****\ *****\ *****\ *****\ *****\ *****}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ CONSTRUCTORS}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ *****\ *****\ *****\ *****\ *****\ *****/}}
+\DoxyCodeLine{00029\ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}()\ :\ \mbox{\hyperlink{classVector3}{Vector3}}(0,0,0,1)\ \{\}\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}(\textcolor{keywordtype}{double}\ \_x,\ \textcolor{keywordtype}{double}\ \_y)}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classVector3}{Vector3}}(\_x,\ \_y,\ 0.0f,\ 1.0f)\ \{\}}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}(\textcolor{keywordtype}{double}\ \_x,\ \textcolor{keywordtype}{double}\ \_y,\ \textcolor{keywordtype}{double}\ \_z)}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classVector3}{Vector3}}(\_x,\ \_y,\ \_z,\ 1.0f)\ \{\}}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}(\textcolor{keywordtype}{double}\ \_x,\ \textcolor{keywordtype}{double}\ \_y,\ \textcolor{keywordtype}{double}\ \_z,\ \textcolor{keywordtype}{double}\ \_w)}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ :\ x(\_x),\ y(\_y),\ z(\_z),\ w(\_w)\ \{\}}
+\DoxyCodeLine{00037\ \ \ }
+\DoxyCodeLine{00038\ \textcolor{comment}{/*****\ *****\ *****\ *****\ *****\ *****}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ OPERATORS}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ *****\ *****\ *****\ *****\ *****\ *****/}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classVector3}{Vector3}}\&\ other)\ }
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \textcolor{comment}{//\ Check\ for\ self-\/assignment}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>x\ =\ other.x;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>y\ =\ other.y;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>z\ =\ other.z;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>w\ =\ other.w;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\&\ operator+=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classVector3}{Vector3}}\&\ other)\ }
+\DoxyCodeLine{00054\ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ this-\/>x\ +=\ other.x;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ this-\/>y\ +=\ other.y;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ this-\/>z\ +=\ other.z;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\&\ operator*=(\textcolor{keywordtype}{float}\ scalar)\ }
+\DoxyCodeLine{00061\ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ this-\/>x\ *=\ scalar;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ this-\/>y\ *=\ scalar;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ this-\/>z\ *=\ scalar;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ operator*(\textcolor{keywordtype}{float}\ scalar)\textcolor{keyword}{\ const\ }}
+\DoxyCodeLine{00069\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classVector3}{Vector3}}(this-\/>x\ *\ scalar,\ this-\/>y\ *\ scalar,\ this-\/>z\ *\ scalar);}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ operator-\/(\textcolor{keyword}{const}\ \mbox{\hyperlink{classVector3}{Vector3}}\&\ other)\textcolor{keyword}{\ const\ }}
+\DoxyCodeLine{00074\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classVector3}{Vector3}}(this-\/>x\ -\/\ other.x,\ this-\/>y\ -\/\ other.y,\ this-\/>z\ -\/\ other.z);}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{classVector3}{Vector3}}\&\ other)\textcolor{keyword}{\ const\ }}
+\DoxyCodeLine{00079\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classVector3}{Vector3}}(this-\/>x\ +\ other.x,\ this-\/>y\ +\ other.y,\ this-\/>z\ +\ other.z);}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classVector3}{Vector3}}\&\ vec)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}x:\ "{}}\ <<\ vec.x\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}y:\ "{}}\ <<\ vec.y\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}z:\ "{}}\ <<\ vec.z\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}w:\ "{}}\ <<\ vec.w;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ os;}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ //\ Convert\ Cartesian\ coordinates\ to\ polar\ coordinates}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//\ //\ Returns\ a\ pair\ where\ first\ element\ is\ the\ radius\ and\ second\ element\ is\ the\ angle}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//\ static\ std::pair<double,\ double>\ toPolar(const\ Vector3\&\ vec)}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ double\ radius\ =\ std::sqrt(vec.x\ *\ vec.x\ +\ vec.y\ *\ vec.y\ +\ vec.z\ *\ vec.z);}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ double\ angle\ =\ std::atan2(vec.y,\ vec.x);}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return\ \{radius,\ angle\};}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//\ //\ Convert\ polar\ coordinates\ to\ Cartesian\ coordinates}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ //\ Takes\ radius\ and\ angle\ as\ inputs\ and\ returns\ a\ Vector3\ in\ Cartesian\ coordinates}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ static\ Vector3\ fromPolar(double\ radius,\ double\ angle)}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ double\ x\ =\ radius\ *\ std::cos(angle);}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ double\ y\ =\ radius\ *\ std::sin(angle);}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return\ Vector3(x,\ y,\ 0.0);}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{comment}{/*****\ *****\ *****\ *****\ *****\ *****}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ RANDOM}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ *****\ *****\ *****\ *****\ *****\ *****/}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classVector3}{Vector3}}\ getRandom()\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::random\_device\ rd;\ \ \textcolor{comment}{//\ Non-\/deterministic\ generator}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\ gen(rd());\ \textcolor{comment}{//\ Seed\ the\ generator}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::uniform\_real\_distribution<>\ dis(0.0,\ 1.0);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_x\ =\ dis(gen);}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_y\ =\ dis(gen);}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_z\ =\ dis(gen);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classVector3}{Vector3}}(\_x,\ \_y,\ \_z,\ 1.0);}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classVector3}{Vector3}}\ generateRandomVector()\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::random\_device\ rd;\ \ \textcolor{comment}{//\ Non-\/deterministic\ generator}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\ gen(rd());\ \textcolor{comment}{//\ Seed\ the\ generator}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::uniform\_real\_distribution<>\ dis(0.0,\ 1.0);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_x\ =\ dis(gen);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_y\ =\ dis(gen);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_z\ =\ dis(gen);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classVector3}{Vector3}}(\_x,\ \_y,\ \_z,\ 1.0);}
+\DoxyCodeLine{00135\ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \mbox{\hyperlink{classVector3}{Vector3}}\ Vector3::zero\ =\ \mbox{\hyperlink{classVector3}{Vector3}}(0,\ 0,\ 0,\ 1);}
+\DoxyCodeLine{00140\ \mbox{\hyperlink{classVector3}{Vector3}}\ Vector3::one\ \ =\ \mbox{\hyperlink{classVector3}{Vector3}}(1,\ 1,\ 1,\ 1);}
+\DoxyCodeLine{00141\ \mbox{\hyperlink{classVector3}{Vector3}}\ Vector3::random\ =\ Vector3::generateRandomVector();}
+
+\end{DoxyCode}

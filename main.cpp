@@ -3,14 +3,14 @@
 #include <GL/freeglut.h>
 unsigned char prevKey;
 
-#include "math.cpp"
-#include "renderer.cpp"
+// #include "math.cpp"
+// #include "renderer.cpp"
 
 // import user script
 // #include "sketches/basics.cpp"
 // #include "sketches/transform.cpp"
-// #include "sketches/dvd.cpp"
-#include "sketches/pong.cpp"
+#include "sketches/dvd.cpp"
+// #include "sketches/pong.cpp"
 
 
 void display(void)

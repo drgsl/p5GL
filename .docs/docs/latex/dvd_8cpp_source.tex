@@ -1,0 +1,197 @@
+\doxysection{dvd.\+cpp}
+\hypertarget{dvd_8cpp_source}{}\label{dvd_8cpp_source}\index{/home/admin/git/p5GL/sketches/dvd.cpp@{/home/admin/git/p5GL/sketches/dvd.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdio>}\ \ \textcolor{comment}{//\ For\ sprintf}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../math.cpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../renderer.cpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}\ RenderString(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{void}\ *font,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{string},\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b)}
+\DoxyCodeLine{00009\ \{\ \ }
+\DoxyCodeLine{00010\ \ \ \textcolor{keywordtype}{char}\ *c;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ glColor3f(r,g,b);\ }
+\DoxyCodeLine{00013\ \ \ glRasterPos2f(x,\ y);}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ glutBitmapString(font,\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*)\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00016\ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPaddle}{Paddle}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ pos;}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ size;}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ speed;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ show()}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ stroke(\mbox{\hyperlink{classColor}{Color}}(\textcolor{stringliteral}{"{}white"{}}));}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ rect(pos,\ pos\ +\ size);}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDVD}{DVD}}}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ pos;}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ size;}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classVector3}{Vector3}}\ speed;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classColor}{Color}}\ color;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ reset()}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ pos\ =\ Vector3::zero;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ speed\ =\ Vector3::getRandom()\ *\ 0.025;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ size\ =\ Vector3::one\ *\ 0.25;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ color\ =\ Color::getRandom();}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \mbox{\hyperlink{classDVD}{DVD}}\ dvd;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \mbox{\hyperlink{classPaddle}{Paddle}}\ player\_left;}
+\DoxyCodeLine{00060\ \mbox{\hyperlink{classPaddle}{Paddle}}\ player\_right;}
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{void}\ setup()}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ dvd.reset();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ player\_left.size\ =\ \mbox{\hyperlink{classVector3}{Vector3}}(0.02f,\ 0.5f);}
+\DoxyCodeLine{00066\ \ \ player\_left.pos\ \ =\ \mbox{\hyperlink{classVector3}{Vector3}}(-\/1\ +\ player\_left.size.x,\ 0);}
+\DoxyCodeLine{00067\ \ \ player\_right.size\ =\ \mbox{\hyperlink{classVector3}{Vector3}}(0.02f,\ 0.1f);\ }
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keywordtype}{int}\ score\_player\ \ \ =\ 0;}
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{int}\ score\_computer\ =\ 0;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{void}\ loop()}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \ \ background(\mbox{\hyperlink{classColor}{Color}}(\textcolor{stringliteral}{"{}black"{}}));}
+\DoxyCodeLine{00076\ \ \ stroke(\mbox{\hyperlink{classColor}{Color}}(\textcolor{stringliteral}{"{}white"{}}));}
+\DoxyCodeLine{00077\ \ \ line(\mbox{\hyperlink{classVector3}{Vector3}}(0,\ 1),\ \mbox{\hyperlink{classVector3}{Vector3}}(0,\ 0.8));}
+\DoxyCodeLine{00078\ \ \ line(\mbox{\hyperlink{classVector3}{Vector3}}(0,\ 0.6),\ \mbox{\hyperlink{classVector3}{Vector3}}(0,\ 0.4));}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ line(\mbox{\hyperlink{classVector3}{Vector3}}(0,\ 0.2),\ \mbox{\hyperlink{classVector3}{Vector3}}(0,\ 0.0));}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ line(\mbox{\hyperlink{classVector3}{Vector3}}(0,\ -\/0.2),\ \mbox{\hyperlink{classVector3}{Vector3}}(0,\ -\/0.4));}
+\DoxyCodeLine{00085\ \ \ line(\mbox{\hyperlink{classVector3}{Vector3}}(0,\ -\/0.6),\ \mbox{\hyperlink{classVector3}{Vector3}}(0,\ -\/0.8));}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ stroke(\string~dvd.color);}
+\DoxyCodeLine{00088\ \ \ rect(dvd.pos\ -\/\ Vector3::one\ *\ 0.01f,\ dvd.pos\ +\ dvd.size\ +\ Vector3::one\ *\ 0.01f);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ stroke(dvd.color);}
+\DoxyCodeLine{00091\ \ \ rect(dvd.pos,\ dvd.pos\ +\ dvd.size);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ dvd.pos.x\ +=\ dvd.speed.x;}
+\DoxyCodeLine{00094\ \ \ dvd.pos.y\ +=\ dvd.speed.y;}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordflow}{if}(dvd.pos.x\ +\ dvd.size.x\ >=\ 1)}
+\DoxyCodeLine{00098\ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ dvd.speed.x\ =\ \ \ -\/\ dvd.speed.x;}
+\DoxyCodeLine{00100\ \ \ \ \ dvd.pos.x\ \ \ =\ 1\ -\/\ dvd.size.x;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ dvd.color\ \ \ =\ Color::getRandom();}
+\DoxyCodeLine{00103\ \ \ \ \ score\_computer++;}
+\DoxyCodeLine{00104\ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (dvd.pos.x\ <=\ -\/1)}
+\DoxyCodeLine{00106\ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{if}\ (dvd.pos.y\ +\ dvd.size.y\ >\ player\_left.pos.y\ \&\&\ dvd.pos.y\ <\ player\_left.pos.y\ +\ player\_left.size.y)}
+\DoxyCodeLine{00108\ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ dvd.speed.x\ =\ -\/\ dvd.speed.x;}
+\DoxyCodeLine{00110\ \ \ \ \ dvd.pos.x\ \ \ =\ -\/\ 1;}
+\DoxyCodeLine{00111\ \ \ \ \ dvd.color\ \ \ =\ Color::getRandom();}
+\DoxyCodeLine{00112\ \ \ \ \ score\_player\ ++;}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{if}(dvd.pos.x\ <=\ -\/2.0f)}
+\DoxyCodeLine{00115\ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ dvd.reset();}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ score\_player\ =\ 0;}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \}}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordflow}{if}(dvd.pos.y\ +\ dvd.size.y\ >=\ 1)}
+\DoxyCodeLine{00121\ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ dvd.speed.y\ =\ \ \ -\/\ dvd.speed.y;}
+\DoxyCodeLine{00123\ \ \ \ \ dvd.pos.y\ \ \ =\ 1\ -\/\ dvd.size.y;}
+\DoxyCodeLine{00124\ \ \ \ \ }
+\DoxyCodeLine{00125\ \ \ \ \ dvd.color\ \ \ =\ Color::getRandom();}
+\DoxyCodeLine{00126\ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(dvd.pos.y\ <=\ -\/1)}
+\DoxyCodeLine{00128\ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ dvd.speed.y\ =\ \ \ -\/\ dvd.speed.y;}
+\DoxyCodeLine{00130\ \ \ \ \ dvd.pos.y\ \ \ =\ \ \ -\/\ 1;\ }
+\DoxyCodeLine{00131\ \ \ \ \ }
+\DoxyCodeLine{00132\ \ \ \ \ dvd.color\ \ \ =\ Color::getRandom();}
+\DoxyCodeLine{00133\ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \textcolor{keywordflow}{if}\ (dvd.pos.x\ <\ 0)}
+\DoxyCodeLine{00137\ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \textcolor{comment}{//\ player\_left.pos\ \ =\ Vector3(-\/1\ +\ player\_left.size.x,\ dvd.pos.y);}}
+\DoxyCodeLine{00139\ \ \ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ player\_left.show();}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \textcolor{keywordflow}{if}(dvd.pos.x\ >\ 0)}
+\DoxyCodeLine{00144\ \ \ \{}
+\DoxyCodeLine{00145\ \ \ player\_right.pos\ \ =\ \mbox{\hyperlink{classVector3}{Vector3}}(1\ -\/\ player\_right.size.x,\ dvd.pos.y);}
+\DoxyCodeLine{00146\ \ \ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ player\_right.show();}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \textcolor{keywordtype}{char}\ buffer[50];\ \ \textcolor{comment}{//\ Make\ sure\ the\ buffer\ is\ large\ enough\ to\ hold\ the\ number}}
+\DoxyCodeLine{00151\ \ \ sprintf(buffer,\ \textcolor{stringliteral}{"{}\%d"{}},\ score\_player);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ cstr\ =\ buffer;}
+\DoxyCodeLine{00154\ \ \ RenderString(-\/1,\ 0.7,\ GLUT\_BITMAP\_TIMES\_ROMAN\_24,\ cstr,\ 0,\ 0,\ 1.0);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordtype}{char}\ buffer2[50];\ \ \textcolor{comment}{//\ Make\ sure\ the\ buffer\ is\ large\ enough\ to\ hold\ the\ number}}
+\DoxyCodeLine{00157\ \ \ sprintf(buffer2,\ \textcolor{stringliteral}{"{}\%d"{}},\ score\_computer);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ cstr2\ =\ buffer2;}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ RenderString(0.9,\ 0.7,\ GLUT\_BITMAP\_TIMES\_ROMAN\_24,\ cstr2,\ 0,\ 0,\ 1.0);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \textcolor{comment}{//\ std::cout\ <<\ dvd.pos.x\ <<\ "{}\ "{}\ <<\ dvd.pos.y\ <<\ "{}\(\backslash\)n"{};}}
+\DoxyCodeLine{00164\ \ \ \textcolor{comment}{//\ std::cout\ <<\ dvd.color.r\ <<\ "{}\ "{}\ <<\ dvd.color.g\ <<\ "{}\ "{}\ <<\ dvd.color.b\ <<\ "{}\(\backslash\)n"{};}}
+\DoxyCodeLine{00165\ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{keywordtype}{void}\ keyPressed(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ key,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)}
+\DoxyCodeLine{00169\ \{}
+\DoxyCodeLine{00170\ printf(\textcolor{stringliteral}{"{}\%c"{}},\ key);}
+\DoxyCodeLine{00171\ \textcolor{comment}{//\ printf("{}\%d"{},\ key);}}
+\DoxyCodeLine{00172\ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00173\ printf(\textcolor{stringliteral}{"{}\%d\ \%d"{}},\ x,\ y);}
+\DoxyCodeLine{00174\ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{keywordflow}{if}(key\ ==\ \textcolor{charliteral}{'w'})}
+\DoxyCodeLine{00177\ \ \ \{}
+\DoxyCodeLine{00178\ \ \ player\_left.pos\ \ =\ \mbox{\hyperlink{classVector3}{Vector3}}(-\/1\ +\ player\_left.size.x,\ player\_left.pos.y\ +\ 0.08);}
+\DoxyCodeLine{00179\ \ \ \}}
+\DoxyCodeLine{00180\ \textcolor{keywordflow}{if}(key\ ==\ \textcolor{charliteral}{'s'})}
+\DoxyCodeLine{00181\ \ \ \{}
+\DoxyCodeLine{00182\ \ \ player\_left.pos\ \ =\ \mbox{\hyperlink{classVector3}{Vector3}}(-\/1\ +\ player\_left.size.x,\ player\_left.pos.y\ -\/\ 0.08);}
+\DoxyCodeLine{00183\ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{keywordflow}{if}\ (key\ ==\ \textcolor{charliteral}{'r'})}
+\DoxyCodeLine{00186\ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ dvd.reset();}
+\DoxyCodeLine{00188\ \ \ \}}
+\DoxyCodeLine{00189\ \}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ }
+
+\end{DoxyCode}
